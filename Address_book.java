@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Address_book_1 {
+public class Address_book {
     Scanner fetch = new Scanner(System.in);
 
     //Declaring variables
@@ -13,7 +13,7 @@ public class Address_book_1 {
 
 
     //Using constructor to pass arguments
-    Address_book_1(String f_name, String l_name, long phone, String em, int zip, String city) {
+    Address_book(String f_name, String l_name, long phone, String em, int zip, String city) {
 
         this.first_name = f_name;
         this.last_name = l_name;
@@ -26,17 +26,17 @@ public class Address_book_1 {
 
 
     // Overriding toString Method to display output
-    public String toString(){
+    public String toString() {
 
-        return ("FIRST NAME : "+first_name+"\nLAST NAME : "+last_name+"\nPHONE : "+phone_no+"\nEMAIL : "+email+"\nZIP CODE : "+zip_code+"\nCITY : "+city);
+        return ("FIRST NAME : " + first_name + "\nLAST NAME : " + last_name + "\nPHONE : " + phone_no + "\nEMAIL : " + email + "\nZIP CODE : " + zip_code + "\nCITY : " + city);
     }
 
 
     public static void main(String[] args) {
 
         // Creating salman and tom instances from address_book class
-        Address_book_1 salman = new Address_book_1("Salman", "Khan", 1234567890, "salman@khan.com", 456002, "Mumbai");
-        Address_book_1 tom = new Address_book_1("Tom", "Cruise", 789456230, "cruise@usa.com", 123456, "Los Angeles");
+        Address_book salman = new Address_book("Salman", "Khan", 1234567890, "salman@khan.com", 456002, "Mumbai");
+        Address_book tom = new Address_book("Tom", "Cruise", 789456230, "cruise@usa.com", 123456, "Los Angeles");
 
         // printing salman and tom objects
         System.out.println(salman);
@@ -45,5 +45,4 @@ public class Address_book_1 {
     }
 
 
-
-    }
+}
