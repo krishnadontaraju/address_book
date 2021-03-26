@@ -3,9 +3,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Address_book {
-    Scanner fetch = new Scanner(System.in);
+    static Scanner fetch = new Scanner(System.in);
 
-    //Declaring variables
+    //Declare the variables
     String first_name;
     String last_name;
     long phone_no;
@@ -14,7 +14,7 @@ public class Address_book {
     String city;
 
 
-    //Using set Details method to take User input
+    //Using set method to assign variables from the user
     public void set_details() {
         System.out.println("GIVE ME THE FIRST NAME :");
         this.first_name = fetch.nextLine();
@@ -31,49 +31,150 @@ public class Address_book {
 
     }
 
-    // To display output
+
+    // USing get name to return fist name while searching for the entries in the book
+    public String getName() {
+
+        return this.first_name;
+    }
+
+    //Display output using to string method
     public String toString() {
 
         return ("FIRST NAME : " + first_name + "\nLAST NAME : " + last_name + "\nPHONE : " + phone_no + "\nEMAIL : " + email + "\nZIP CODE : " + zip_code + "\nCITY : " + city);
     }
 
+    //Using change details method to change the details of the entries which uses switch
+    public void change_details() {
+        System.out.println("WHICH DETAiLS DO YOU WAnT TO CHANGE ? :");
+        System.out.println("1.FIRST NAME\n2.LAST NAME\n3.PHONE NO.\n4.EMAIL\n5.ZIP CODE\n6.CITY\n7.EXIT");
+        int change_choice = fetch.nextInt();
+        switch (change_choice) {
+
+            case 1://changes the First name
+                System.out.println("CHANGE THE FIRST NAME TO :");//Allowing user to change First name
+                String changer_fname = fetch.next();
+                this.first_name = changer_fname;
+                break;
+            case 2://changes the last name
+                System.out.println("CHANGE THE LAST NAME TO :");//Allowing user to change Last name
+                String changer_lname = fetch.next();
+                this.last_name = changer_lname;
+                break;
+            case 3://changes the Phone no.
+                System.out.println("CHANGE THE PHONE NUMBER TO :");//Allowing user to change Contact number
+                int changer_phone = fetch.nextInt();
+                this.phone_no = changer_phone;
+                break;
+
+            case 4://changes the Email
+                System.out.println("CHANGE THE EMAIL ID TO :");//Allowing user to change the email
+                String changer_email = fetch.next();
+                this.email = changer_email;
+                break;
+
+
+            case 5://changes the ZIP code
+                System.out.println("CHANGE THE ZIP CODE TO :");//Allowing user to change the Zip code
+                int changer_zip = fetch.nextInt();
+                this.zip_code = changer_zip;
+                break;
+
+            case 6://changes the City
+                System.out.println("CHANGE THE CITY TO :");//Allowing user to change the City
+                String changer_city = fetch.next();
+                this.city = changer_city;
+                break;
+
+            default:
+                break;
+        }
+
+    }
 
     public static void main(String[] args) {
-
-        //Creating a list of class Address_book
+        Scanner input = new Scanner(System.in);
+        //Creating a list to store arrays
         List<Address_book> users = new ArrayList<>();
-        Address_book salman = new Address_book();
-        Address_book tom = new Address_book();
+
+        Address_book salman = new Address_book();//creating salman object
+        Address_book tom = new Address_book();// creating tom object
         System.out.println("GIVE ME SALMAN's DETAILS");
-        salman.set_details();
         salman.set_details();
         System.out.println("GIVE ME TOM's DETAILS");
         tom.set_details();
 
         users.add(salman);
         users.add(tom);
-        Scanner input = new Scanner(System.in);
-        System.out.println("WHAT DO YOU WANT TO DO \n" + "1.ADD DETAILS\n 2.EXIT");
-        int choice = input.nextInt();
-        //using switch make appropraite choices
-        switch (choice) {
-            //Adding the user case
-            case 1:
 
-                Address_book steve = new Address_book();
-                steve.set_details();
-                users.add(steve);
-                System.out.println("Added THE USER :");
-                System.out.println(users);
+        // taking the first input from the user to add details or exit or edit
+        System.out.println("WHAT DO YOU WANT TO DO\n" + "1.ADD DETAILS\n 2.EDIT THE DETAILS\n3.EXIT");
+        int choice = input.nextInt();
+
+
+        switch (choice) {
+
+            case 1://Adding entries to the book
+                System.out.println("HOW MANY USERS DO YOU WANT TO ADD");
+                int user_choice = input.nextInt();
+                //input
+                for (int i = 0; i < user_choice; i++) {
+                    Address_book steve = new Address_book();
+                    steve.set_details();
+                    users.add(steve);
+                    System.out.println(steve.toString());
+                }
+
+                System.out.println("WHAT NEXT DO YOU WANT TO DO\n1.EDIT THE DETAILS\n2.EXIT");
+                int choice2 = input.nextInt();
+                switch (choice2) {//if user want to edit the added details
+
+
+                    case 1:
+                        System.out.println(users);
+                        System.out.println("WHOSE DETAILS DO YOU WANT TO EDIT");//asking user whose details he wants to change
+                        String store = input.next();
+                        for (Address_book i : users) {//Iterating until we find the name whose details user wants to change
+
+                            if (i.getName().equals(store)) {
+
+                                i.change_details();//calling change method to change details
+
+                            }
+
+                        }
+                        System.out.println(users);// printing the changed details
+                        break;
+
+
+                    default:
+                        break;
+                }
+                break;
+            case 2:
+                System.out.println(users); //asking user whose details he wants to change
+                System.out.println("WHOSE DETAILS DO YOU WANT TO EDIT");
+                String store = input.next();
+                for (Address_book i : users) {  //Iterating until we find the name whose details user wants to change
+
+                    if (i.getName().equals(store)) {
+
+
+                        i.change_details(); //calling change method to change details
+
+                    }
+
+                }
+                System.out.println(users); // printing the changed details
+                break;
 
 
             default:
                 break;
 
+
         }
 
-
     }
-
 
 }
