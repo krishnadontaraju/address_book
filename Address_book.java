@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Address_book {
-    static Scanner fetch = new Scanner(System.in);
+    Scanner fetch = new Scanner(System.in);
 
     //Declare the variables
     String first_name;
@@ -31,20 +31,13 @@ public class Address_book {
 
     }
 
-
-    // USing get name to return fist name while searching for the entries in the book
-    public String getName() {
-
-        return this.first_name;
-    }
-
-    //Display output using to string method
+    //Display output
     public String toString() {
 
         return ("FIRST NAME : " + first_name + "\nLAST NAME : " + last_name + "\nPHONE : " + phone_no + "\nEMAIL : " + email + "\nZIP CODE : " + zip_code + "\nCITY : " + city);
     }
 
-    //Using change details method to change the details of the entries which uses switch
+
     public void change_details() {
         System.out.println("WHICH DETAiLS DO YOU WAnT TO CHANGE ? :");
         System.out.println("1.FIRST NAME\n2.LAST NAME\n3.PHONE NO.\n4.EMAIL\n5.ZIP CODE\n6.CITY\n7.EXIT");
@@ -92,14 +85,23 @@ public class Address_book {
 
     }
 
+
+    //Using get name method to check with user's input
+    public String getName() {
+
+        return first_name;
+    }
+
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        //Creating a list to store arrays
+        //Creating a list
         List<Address_book> users = new ArrayList<>();
 
         Address_book salman = new Address_book();//creating salman object
         Address_book tom = new Address_book();// creating tom object
         System.out.println("GIVE ME SALMAN's DETAILS");
+        salman.set_details();
         salman.set_details();
         System.out.println("GIVE ME TOM's DETAILS");
         tom.set_details();
@@ -107,8 +109,8 @@ public class Address_book {
         users.add(salman);
         users.add(tom);
 
-        // taking the first input from the user to add details or exit or edit
-        System.out.println("WHAT DO YOU WANT TO DO\n" + "1.ADD DETAILS\n 2.EDIT THE DETAILS\n3.EXIT");
+        System.out.println("WHAT DO YOU WANT TO DO\n" +
+                "1.ADD DETAILS\n 2.EXIT");
         int choice = input.nextInt();
 
 
@@ -117,17 +119,16 @@ public class Address_book {
             case 1://Adding entries to the book
                 System.out.println("HOW MANY USERS DO YOU WANT TO ADD");
                 int user_choice = input.nextInt();
-                //input
                 for (int i = 0; i < user_choice; i++) {
-                    Address_book steve = new Address_book();
-                    steve.set_details();
-                    users.add(steve);
-                    System.out.println(steve.toString());
+                    Address_book person = new Address_book();// Using person instance of Address_book class as reference object
+                    person.set_details();
+                    users.add(person);
+                    System.out.println(person.toString());
                 }
 
-                System.out.println("WHAT NEXT DO YOU WANT TO DO\n1.EDIT THE DETAILS\n2.EXIT");
+                System.out.println("WHAT NEXT DO YOU WANT TO DO\n1.EDIT THE DETAILS\n2.DELETE USER\n3.EXIT");
                 int choice2 = input.nextInt();
-                switch (choice2) {//if user want to edit the added details
+                switch (choice2) {
 
 
                     case 1:
@@ -145,27 +146,26 @@ public class Address_book {
                         }
                         System.out.println(users);// printing the changed details
                         break;
+                    case 2:
+                        System.out.println(users);//if user want to delete the added details
+                        System.out.println("WHOSE DETAILS DO YOU WANT TO DELETE");
+                        String delete_store = input.next();
+                        for (Address_book i : users) {//iterating through the arraylist until finds user's input
+
+                            if (i.getName().equals(delete_store)) {
+
+                                users.remove(i);//Using remove method to delete entry
+
+                            } else
+                                System.out.println("WRONG INPUT");
+
+                        }
+                        System.out.println(users);
 
 
                     default:
                         break;
                 }
-                break;
-            case 2:
-                System.out.println(users); //asking user whose details he wants to change
-                System.out.println("WHOSE DETAILS DO YOU WANT TO EDIT");
-                String store = input.next();
-                for (Address_book i : users) {  //Iterating until we find the name whose details user wants to change
-
-                    if (i.getName().equals(store)) {
-
-
-                        i.change_details(); //calling change method to change details
-
-                    }
-
-                }
-                System.out.println(users); // printing the changed details
                 break;
 
 
@@ -174,6 +174,10 @@ public class Address_book {
 
 
         }
+
+
+        System.out.println("THE FINAL LIST OF USERS IS");
+        System.out.println(users);
 
     }
 
