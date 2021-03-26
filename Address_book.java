@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Address_book {
+class Address_book {
     Scanner fetch = new Scanner(System.in);
 
     //Declare the variables
@@ -92,11 +92,20 @@ public class Address_book {
         return first_name;
     }
 
+    int number;
+
+    public void zero_set() {
+
+        this.number = 0;
+
+    }
+
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         //Creating a list
         List<Address_book> users = new ArrayList<>();
+        List<Address_book> to_remove = new ArrayList<>();
 
         Address_book salman = new Address_book();//creating salman object
         Address_book tom = new Address_book();// creating tom object
@@ -154,14 +163,17 @@ public class Address_book {
 
                             if (i.getName().equals(delete_store)) {
 
-                                users.remove(i);//Using remove method to delete entry
-
-                            } else
+                                to_remove.add(i);// Using to_remove instance to store remove properties
+                                System.out.println("DELETED " + i.getName());
+                                break;
+                            } else {
                                 System.out.println("WRONG INPUT");
+                                i.zero_set();
+                            }
+
 
                         }
-                        System.out.println(users);
-
+                        users.removeAll(to_remove);// removing stored user details
 
                     default:
                         break;
